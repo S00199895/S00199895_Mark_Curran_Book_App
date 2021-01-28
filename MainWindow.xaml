@@ -7,14 +7,38 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="231" Margin="27,48,0,0" VerticalAlignment="Top" Width="270">
+        <TabControl HorizontalAlignment="Left" Height="231" Margin="25,19,0,0" VerticalAlignment="Top" Width="270">
             <TabItem Header="Read">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="264"/>
+                    <Button Content="Save" HorizontalAlignment="Left" Margin="189,180,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
             </TabItem>
             <TabItem Header="TBR">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="21*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="264" Grid.ColumnSpan="2"/>
+                    <Button Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="168,175,0,0" VerticalAlignment="Top" Width="74"/>
+                </Grid>
             </TabItem>
         </TabControl>
+        <TextBlock HorizontalAlignment="Left" Margin="10,276,0,0" TextWrapping="Wrap" Text="Add a book" VerticalAlignment="Top" FontSize="16"/>
+        <RadioButton Content="Read" HorizontalAlignment="Left" Margin="10,302,0,0" VerticalAlignment="Top"/>
+        <RadioButton Content="TBR" HorizontalAlignment="Left" Margin="98,302,0,0" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="12,364,0,0" TextWrapping="Wrap" Text="Rating" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,338,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,322,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="83,321,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+        <TextBox HorizontalAlignment="Left" Height="17" Margin="83,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+        <ComboBox HorizontalAlignment="Left" Margin="83,364,0,0" VerticalAlignment="Top" Width="42"/>
+        <Button Content="Add Book" HorizontalAlignment="Left" Margin="50,389,0,0" VerticalAlignment="Top" Width="75"/>
+        <Image HorizontalAlignment="Left" Height="190" Margin="320,36,0,0" VerticalAlignment="Top" Width="148"/>
+        <TextBlock HorizontalAlignment="Left" Margin="603,77,0,0" TextWrapping="Wrap" Text="Book selected description" VerticalAlignment="Top"/>
+        <Button Content="Save book info" HorizontalAlignment="Left" Margin="616,136,0,0" VerticalAlignment="Top" Width="105"/>
+        <Grid HorizontalAlignment="Left" Height="137" Margin="441,249,0,0" VerticalAlignment="Top" Width="319"/>
 
     </Grid>
 </Window>
