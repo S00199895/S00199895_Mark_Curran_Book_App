@@ -35,7 +35,7 @@
         <TextBox HorizontalAlignment="Left" Height="17" Margin="83,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
         <ComboBox HorizontalAlignment="Left" Margin="83,364,0,0" VerticalAlignment="Top" Width="42"/>
         <Button Content="Add Book" HorizontalAlignment="Left" Margin="50,389,0,0" VerticalAlignment="Top" Width="75"/>
-        <Image HorizontalAlignment="Left" Height="190" Margin="320,36,0,0" VerticalAlignment="Top" Width="148"/>
+        <Image HorizontalAlignment="Left" Height="190" Margin="348,54,0,0" VerticalAlignment="Top" Width="148"/>
         <TextBlock HorizontalAlignment="Left" Margin="603,77,0,0" TextWrapping="Wrap" Text="Book selected description" VerticalAlignment="Top"/>
         <Button Content="Save book info" HorizontalAlignment="Left" Margin="616,136,0,0" VerticalAlignment="Top" Width="105"/>
         <Grid HorizontalAlignment="Left" Height="137" Margin="441,249,0,0" VerticalAlignment="Top" Width="319"/>
