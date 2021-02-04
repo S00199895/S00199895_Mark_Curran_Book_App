@@ -12,11 +12,11 @@ namespace S00199895_Mark_Curran_Book_App
 		public string Title { get; set; }
 		public string Author { get; set; }
 		public string Description { get; set; }
-		public int Rating { get; set; }
+		public byte Rating { get; set; }
 		public string ImageURI { get; set; }
 
 		//ctor
-		public Book(string title, string author, int rating)
+		public Book(string title, string author, byte rating)
 		{
 			Title = title;
 			Author = author;

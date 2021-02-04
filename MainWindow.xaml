@@ -5,13 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:S00199895_Mark_Curran_Book_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="231" Margin="25,19,0,0" VerticalAlignment="Top" Width="270">
             <TabItem Header="Read">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="264"/>
-                    <Button Content="Save" HorizontalAlignment="Left" Margin="189,180,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="19*"/>
+                        <ColumnDefinition Width="69*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="dataGrid_read"
+                              AutoGenerateColumns="False"
+                              HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="264" Grid.ColumnSpan="2"/>
+                    <Button Content="Save" HorizontalAlignment="Left" Margin="132,180,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="TBR">

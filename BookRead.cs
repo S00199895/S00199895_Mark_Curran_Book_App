@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace S00199895_Mark_Curran_Book_App
 {
-	public class BookTBR : Book
+	public class BookRead : Book
 	{
 		//props
 		public DateTime DateRead { get; set; }
 
 		//inherits base class Book
-		public BookTBR(string title, string author) : base(title, author)
+		public BookRead(string title, string author, byte rating) : base(title, author, rating)
 		{
-
+			
 		}
 	}
 }
