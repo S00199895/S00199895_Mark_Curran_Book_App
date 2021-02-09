@@ -14,9 +14,21 @@
                         <ColumnDefinition Width="19*"/>
                         <ColumnDefinition Width="69*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dataGrid_read"
+                    <DataGrid x:Name="dataGrid_read" ItemsSource="{Binding Book}"
                               AutoGenerateColumns="False"
-                              HorizontalAlignment="Left" Height="175" VerticalAlignment="Top" Width="264" Grid.ColumnSpan="2"/>
+                              HeadersVisibility="Column" Grid.ColumnSpan="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Title"
+                                                Binding="{Binding Title}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Author"
+                                                Binding="{Binding Author}"
+                                                Width="Auto"/>
+                            <DataGridTextColumn Header="Rating"
+                                                Binding="{Binding Rating}"
+                                                Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Button Content="Save" HorizontalAlignment="Left" Margin="132,180,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
                 </Grid>
             </TabItem>
