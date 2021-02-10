@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RestSharp;
+using System.Net;
+using RestSharp.Serialization.Json;
 
 namespace S00199895_Mark_Curran_Book_App
 {
@@ -52,6 +55,27 @@ namespace S00199895_Mark_Curran_Book_App
 
 			dataGrid_read.ItemsSource = booksRead;
 			dataGrid_tbr.ItemsSource = booksTBR;
+
+			GetBookInfo();
+		}
+
+		private void GetBookInfo()
+		{
+			//REST Google Books API call
+			
+			var client = new RestClient("https://www.googleapis.com/books/v1/volumes?q=the+stand");
+			var request = new RestRequest( Method.GET);
+			var deserial = new JsonDeserializer();
+			var response = client.Execute(request);
+
+			var content = response.Content;
+
+			var output = deserial.Deserialize<Dictionary<string, string>>(response);
+
+			//object? 
+			//need to reference object output[0].volumeInfo
+
+			//tblk_description.Text = output.volumeInfo;
 		}
 	}
 }
