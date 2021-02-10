@@ -34,6 +34,7 @@ namespace S00199895_Mark_Curran_Book_App
 			BookRead b1 = new BookRead("The Stand", "Stephen King", 8);
 			BookRead b2 = new BookRead("Blood of Elves", "Andrzej Sapkowski", 8);
 			BookRead b3 = new BookRead("Neuromancer", "William Gibson", 6);
+			BookRead b4 = new BookRead("Jade City", "Fonda Lee", 9);
 
 			Book tbr1 = new Book("Jade War", "Fonda Lee");
 			Book tbr2 = new Book("It", "Stephen King");
@@ -43,12 +44,14 @@ namespace S00199895_Mark_Curran_Book_App
 			booksRead.Add(b1);
 			booksRead.Add(b2);
 			booksRead.Add(b3);
+			booksRead.Add(b4);
 
 			booksTBR.Add(tbr1);
 			booksTBR.Add(tbr2);
 			booksTBR.Add(tbr3);
 
 			dataGrid_read.ItemsSource = booksRead;
+			dataGrid_tbr.ItemsSource = booksTBR;
 		}
 	}
 }

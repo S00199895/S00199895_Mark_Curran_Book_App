@@ -38,7 +38,18 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="21*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="264" Grid.ColumnSpan="2"/>
+                    <DataGrid x:Name="dataGrid_tbr" ItemsSource="{Binding Book}"
+                              AutoGenerateColumns="False"
+                              HeadersVisibility="Column" Grid.ColumnSpan="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Title"
+                                                Binding="{Binding Title}"
+                                                Width="*"/>
+                            <DataGridTextColumn Header="Author"
+                                                Binding="{Binding Author}"
+                                                Width="Auto"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Button Content="Save" Grid.Column="1" HorizontalAlignment="Left" Margin="168,175,0,0" VerticalAlignment="Top" Width="74"/>
                 </Grid>
             </TabItem>

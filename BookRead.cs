@@ -10,11 +10,18 @@ namespace S00199895_Mark_Curran_Book_App
 	{
 		//props
 		public DateTime DateRead { get; set; }
+		public byte Rating { get; set; }
 
 		//inherits base class Book
-		public BookRead(string title, string author, byte rating) : base(title, author, rating)
+		public BookRead(string title, string author) : base(title, author)
 		{
 			
+		}
+		public BookRead(string title, string author, byte rating)
+		{
+			Title = title;
+			Author = author;
+			Rating = rating;
 		}
 	}
 }
