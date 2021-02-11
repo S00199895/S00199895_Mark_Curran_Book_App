@@ -22,6 +22,11 @@ namespace S00199895_Mark_Curran_Book_App
 			Title = title;
 			Author = author;
 			Rating = rating;
+			DateRead = DateTime.Now;
+		}
+		public BookRead()
+		{
+			DateRead = DateTime.Now;
 		}
 	}
 }
