@@ -4,7 +4,6 @@ using RestSharp;
 using Newtonsoft;
 using RestSharp.Serialization.Json;
 using Newtonsoft.Json;
-using S00199895_Mark_Curran_Book_App.QuickType;
 
 namespace S00199895_Mark_Curran_Book_App
 {
