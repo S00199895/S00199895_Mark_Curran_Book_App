@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using RestSharp;
-using System.Net;
+using Newtonsoft;
 using RestSharp.Serialization.Json;
+using Newtonsoft.Json;
+using S00199895_Mark_Curran_Book_App.QuickType;
 
 namespace S00199895_Mark_Curran_Book_App
 {
@@ -90,18 +80,12 @@ namespace S00199895_Mark_Curran_Book_App
 			
 			var client = new RestClient("https://www.googleapis.com/books/v1/volumes?q=the+stand");
 			var request = new RestRequest(Method.GET);
-			var deserial = new JsonDeserializer();
 			var response = client.Execute(request);
 
 			var content = response.Content;
 
-			var output = deserial.Deserialize<Dictionary<string, string>>(response);
-			var info = output["items"];
-			//var bookInfo = info["title"];
-			//object? 
-			//need to reference object output[0].volumeInfo
-
-			//tblk_description.Text = bookInfo;
+			BookRESTAPI bookInfo = JsonConvert.DeserializeObject<BookRESTAPI>(content);
+			//string name = volume.title;
 		}
 		//Add a new book from the bottom left UI
 		private void btn_addBook_Click(object sender, RoutedEventArgs e)
@@ -124,10 +108,11 @@ namespace S00199895_Mark_Curran_Book_App
 				book.Author = tbx_author.Text;
 				booksTBR.Add(book);
 			}
+			//Clear the text boxes
 			tbx_title.Clear();
 			tbx_author.Clear();
 			combo_rating.SelectedIndex = 0;
-			Update();
+			Update();	//Resets the dataGrid ItemSource
 		}
 	}
 }
