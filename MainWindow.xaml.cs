@@ -4,6 +4,8 @@ using RestSharp;
 using Newtonsoft;
 using RestSharp.Serialization.Json;
 using Newtonsoft.Json;
+using System.Net;
+using Newtonsoft.Json.Linq;
 
 namespace S00199895_Mark_Curran_Book_App
 {
@@ -75,8 +77,25 @@ namespace S00199895_Mark_Curran_Book_App
 
 		private void GetBookInfo()
 		{
+			var apiURL = "https://www.googleapis.com/books/v1/volumes?q=the+stand";
+
+			using (WebClient wc = new WebClient())
+			{
+				var jsondata = wc.DownloadString(apiURL);
+				JObject jsonobject = JObject.Parse(jsondata.ToString());
+
+				var obj = JsonConvert.DeserializeObject<Root>(jsondata);
+
+				var results = obj.items;
+
+				foreach (var item in results)
+				{
+					MessageBox.Show(item.volumeInfo.title);
+					MessageBox.Show(item.volumeInfo.description);
+				}
+			}
 			//REST Google Books API call
-			
+			/*
 			var client = new RestClient("https://www.googleapis.com/books/v1/volumes?q=the+stand");
 			var request = new RestRequest(Method.GET);
 			var response = client.Execute(request);
@@ -84,7 +103,8 @@ namespace S00199895_Mark_Curran_Book_App
 			var content = response.Content;
 
 			BookRESTAPI bookInfo = JsonConvert.DeserializeObject<BookRESTAPI>(content);
-			//string name = volume.title;
+			//string name = volume.title;*/
+
 		}
 		//Add a new book from the bottom left UI
 		private void btn_addBook_Click(object sender, RoutedEventArgs e)
