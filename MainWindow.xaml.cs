@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using Newtonsoft.Json;
-using System.Net;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Windows.Media.Imaging;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace S00199895_Mark_Curran_Book_App
 {
@@ -65,7 +66,7 @@ namespace S00199895_Mark_Curran_Book_App
 
 			for (byte i = 1; i <= 10; i++)
 			{
-				
+
 				ratings[z] = i;
 				z++;
 			}
@@ -86,8 +87,8 @@ namespace S00199895_Mark_Curran_Book_App
 
 				var results = obj.items;
 
-				
-				
+
+
 				DisplayBookInfo(results);
 			}
 		}
@@ -95,11 +96,11 @@ namespace S00199895_Mark_Curran_Book_App
 		private void DisplayBookInfo(List<Item> info)
 		{
 			var item = info[0];
-				img_book.Source = new BitmapImage(new Uri(item.volumeInfo.imageLinks.smallThumbnail));
-				tblk_description.Text = item.volumeInfo.description;
-				tbx_title.Text = item.volumeInfo.title;
-				tbx_author.Text = item.volumeInfo.authors[0];
-			
+			img_book.Source = new BitmapImage(new Uri(item.volumeInfo.imageLinks.smallThumbnail));
+			tblk_description.Text = item.volumeInfo.description;
+			tbx_title.Text = item.volumeInfo.title;
+			tbx_author.Text = item.volumeInfo.authors[0];
+
 		}
 
 		//Add a new book from the bottom left UI
@@ -113,7 +114,7 @@ namespace S00199895_Mark_Curran_Book_App
 				bookRead.Author = tbx_author.Text;
 				bookRead.Rating = (byte)combo_rating.SelectedItem;
 				booksRead.Add(bookRead);
-				
+
 			}
 			//If it's not read
 			else if (radio_tbr.IsChecked == true)
@@ -127,7 +128,7 @@ namespace S00199895_Mark_Curran_Book_App
 			tbx_title.Clear();
 			tbx_author.Clear();
 			combo_rating.SelectedIndex = 0;
-			Update();	//Resets the dataGrid ItemSource
+			Update();   //Resets the dataGrid ItemSource
 		}
 
 		private void searchbar_click(object sender, RoutedEventArgs e)
@@ -137,6 +138,23 @@ namespace S00199895_Mark_Curran_Book_App
 				string query = searchbar.Text;
 				GetBookInfo(query);
 			}
+		}
+
+		private void btn_save_bookInfo_Click(object sender, RoutedEventArgs e)
+		{
+			StreamWriter sW = new StreamWriter("bookInfo.txt");
+
+			//if (GetBookInfo())
+
+			sW.WriteLine($"{tbx_title.Text}, By {tbx_author.Text}\n\n");
+			sW.WriteLine(tblk_description.Text);
+			sW.Flush();
+			sW.Close();
+			MessageBox.Show("Book info saved to file");
+		}
+		private void btn_save_books_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }
