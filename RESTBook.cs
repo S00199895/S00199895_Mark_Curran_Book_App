@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace S00199895_Mark_Curran_Book_App
 {
-	class BookRESTAPI
-	{
-	}
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
     public class IndustryIdentifier
     {
         public string type { get; set; }
@@ -141,5 +139,6 @@ namespace S00199895_Mark_Curran_Book_App
         public int totalItems { get; set; }
         public List<Item> items { get; set; }
     }
+
 
 }

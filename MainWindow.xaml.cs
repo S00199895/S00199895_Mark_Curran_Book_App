@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using RestSharp;
-using Newtonsoft;
-using RestSharp.Serialization.Json;
 using Newtonsoft.Json;
 using System.Net;
 using Newtonsoft.Json.Linq;
+using System.Windows.Media.Imaging;
+using System;
 
 namespace S00199895_Mark_Curran_Book_App
 {
@@ -57,7 +56,6 @@ namespace S00199895_Mark_Curran_Book_App
 			dataGrid_read.ItemsSource = booksRead;
 			dataGrid_tbr.ItemsSource = booksTBR;
 
-			GetBookInfo();
 		}
 		//Adds 1-10 to the comboBox
 		private byte[] FillComboBox()
@@ -75,9 +73,9 @@ namespace S00199895_Mark_Curran_Book_App
 			return ratings;
 		}
 
-		private void GetBookInfo()
+		private void GetBookInfo(string query)
 		{
-			var apiURL = "https://www.googleapis.com/books/v1/volumes?q=the+stand";
+			var apiURL = "https://www.googleapis.com/books/v1/volumes?q=" + query;
 
 			using (WebClient wc = new WebClient())
 			{
@@ -88,24 +86,22 @@ namespace S00199895_Mark_Curran_Book_App
 
 				var results = obj.items;
 
-				foreach (var item in results)
-				{
-					MessageBox.Show(item.volumeInfo.title);
-					MessageBox.Show(item.volumeInfo.description);
-				}
+				
+				
+				DisplayBookInfo(results);
 			}
-			//REST Google Books API call
-			/*
-			var client = new RestClient("https://www.googleapis.com/books/v1/volumes?q=the+stand");
-			var request = new RestRequest(Method.GET);
-			var response = client.Execute(request);
-
-			var content = response.Content;
-
-			BookRESTAPI bookInfo = JsonConvert.DeserializeObject<BookRESTAPI>(content);
-			//string name = volume.title;*/
-
 		}
+
+		private void DisplayBookInfo(List<Item> info)
+		{
+			var item = info[0];
+				img_book.Source = new BitmapImage(new Uri(item.volumeInfo.imageLinks.smallThumbnail));
+				tblk_description.Text = item.volumeInfo.description;
+				tbx_title.Text = item.volumeInfo.title;
+				tbx_author.Text = item.volumeInfo.authors[0];
+			
+		}
+
 		//Add a new book from the bottom left UI
 		private void btn_addBook_Click(object sender, RoutedEventArgs e)
 		{
@@ -132,6 +128,12 @@ namespace S00199895_Mark_Curran_Book_App
 			tbx_author.Clear();
 			combo_rating.SelectedIndex = 0;
 			Update();	//Resets the dataGrid ItemSource
+		}
+
+		private void searchbar_click(object sender, RoutedEventArgs e)
+		{
+			string query = searchbar.Text;
+			GetBookInfo(query);
 		}
 	}
 }
