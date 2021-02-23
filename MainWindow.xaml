@@ -67,12 +67,11 @@
         <TextBox x:Name="tbx_author" HorizontalAlignment="Left" Height="17" Margin="83,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
         <ComboBox x:Name="combo_rating" HorizontalAlignment="Left" Margin="83,364,0,0" VerticalAlignment="Top" Width="42"/>
         <Button x:Name="btn_addBook" Content="Add Book" HorizontalAlignment="Left" Margin="50,389,0,0" VerticalAlignment="Top" Width="75" Click="btn_addBook_Click"/>
-        <Image x:Name="img_book" HorizontalAlignment="Left" Height="190" Margin="393,40,0,0" VerticalAlignment="Top" Width="148"/>
-        <TextBlock x:Name="tblk_description" HorizontalAlignment="Left" Margin="546,27,0,0" TextWrapping="Wrap" Text="Book selected description" VerticalAlignment="Top" Height="109" Width="236"/>
-        <Button Content="Save book info" HorizontalAlignment="Left" Margin="616,141,0,0" VerticalAlignment="Top" Width="105"/>
-        <Grid HorizontalAlignment="Left" Height="137" Margin="441,249,0,0" VerticalAlignment="Top" Width="319"/>
-        <TextBox x:Name="searchbar" HorizontalAlignment="Left" Height="23" Margin="243,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
-        <Button Content="Search&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="46" Margin="408,13,0,0" Height="22" Click="searchbar_click"/>
+        <Image x:Name="img_book" HorizontalAlignment="Left" Height="190" Margin="385,190,0,0" VerticalAlignment="Top" Width="148" Source="1200px-Grey_background.jpg"/>
+        <TextBlock x:Name="tblk_description" HorizontalAlignment="Left" Margin="546,229,0,0" TextWrapping="Wrap" Text="Book selected description" VerticalAlignment="Top" Height="130" Width="236"/>
+        <Button Content="Save book info" HorizontalAlignment="Left" Margin="594,389,0,0" VerticalAlignment="Top" Width="105"/>
+        <TextBox x:Name="searchbar" HorizontalAlignment="Left" Height="23" Margin="498,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+        <Button Content="Search&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="46" Margin="663,149,0,0" Height="22" Click="searchbar_click"/>
 
     </Grid>
 </Window>

@@ -132,8 +132,11 @@ namespace S00199895_Mark_Curran_Book_App
 
 		private void searchbar_click(object sender, RoutedEventArgs e)
 		{
-			string query = searchbar.Text;
-			GetBookInfo(query);
+			if (searchbar.Text != null)
+			{
+				string query = searchbar.Text;
+				GetBookInfo(query);
+			}
 		}
 	}
 }
