@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace S00199895_Mark_Curran_Book_App
@@ -133,6 +134,8 @@ namespace S00199895_Mark_Curran_Book_App
 
 		private void searchbar_click(object sender, RoutedEventArgs e)
 		{
+			tblk_description.FontStyle = FontStyles.Normal;
+			tblk_description.Foreground = Brushes.Black;
 			if (searchbar.Text != null)
 			{
 				string query = searchbar.Text;
@@ -154,7 +157,45 @@ namespace S00199895_Mark_Curran_Book_App
 		}
 		private void btn_save_books_Click(object sender, RoutedEventArgs e)
 		{
+			foreach (Book b in booksRead)
+			{
+				StreamWriter sW = new StreamWriter("booksList.txt");
 
+				sW.WriteLine($"{b.Title}, by {b.Author}");
+			}
+		}
+
+		//Change the placeholder text set in the xaml back
+		private void searchbar_GotFocus(object sender, RoutedEventArgs e)
+		{
+			searchbar.Text = "";
+			searchbar.Foreground = Brushes.Black;
+			searchbar.FontStyle = FontStyles.Normal;
+
+		}
+
+		private void dataGrid_read_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			BookRead bR = dataGrid_read.SelectedItem as BookRead;
+
+			GetBookInfo(bR.Title + " " + bR.Author);
+		}
+
+		private void dataGrid_tbr_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			Book book = dataGrid_tbr.SelectedItem as Book;
+
+			if (book != null)
+			{
+				GetBookInfo(book.Title + " " + book.Author);
+			}
+			
+		}
+
+		private void tbx_title_GotFocus(object sender, RoutedEventArgs e)
+		{
+			tbx_title.Clear();
+			tbx_author.Clear();
 		}
 	}
 }
