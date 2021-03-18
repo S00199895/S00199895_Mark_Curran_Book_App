@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Net;
 using System.Windows;
@@ -196,6 +197,24 @@ namespace S00199895_Mark_Curran_Book_App
 		{
 			tbx_title.Clear();
 			tbx_author.Clear();
+		}
+
+		private void InsertData()
+		{
+			string connetionString = "Data Source=BookAppDB.mdf;Initial Catalog=Air; Trusted_Connection=True;";
+			// [ ] required as your fields contain spaces!!
+			string insStmt = "insert into dbo.Books ([Title], [Author]) values (@title,@author)";
+
+			using (SqlConnection cnn = new SqlConnection(connetionString))
+			{
+				cnn.Open();
+				SqlCommand insCmd = new SqlCommand(insStmt, cnn);
+				// use sqlParameters to prevent sql injection!
+				insCmd.Parameters.AddWithValue("@title", "Jade War");
+				insCmd.Parameters.AddWithValue("@author", "Fonda Lee");
+				int affectedRows = insCmd.ExecuteNonQuery();
+				MessageBox.Show(affectedRows + " rows inserted!");
+			}
 		}
 	}
 }

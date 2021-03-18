@@ -12,24 +12,18 @@ namespace S00199895_Mark_Curran_Book_App
     using System;
     using System.Collections.Generic;
     
-    public partial class Book
+    public partial class Author
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public int AuthorId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Author()
+        {
+            this.Books = new HashSet<Book>();
+        }
     
-        public virtual Author Author1 { get; set; }
-
-		public Book(string t, string author)
-		{
-            Title = t;
-            Author = author;
-		}
-
-		public Book()
-		{
-
-		}
+        public int Id { get; set; }
+        public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Book> Books { get; set; }
     }
 }
