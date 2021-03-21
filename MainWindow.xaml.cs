@@ -2,9 +2,11 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Net;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -135,8 +137,7 @@ namespace S00199895_Mark_Curran_Book_App
 
 		private void searchbar_click(object sender, RoutedEventArgs e)
 		{
-			tblk_description.FontStyle = FontStyles.Normal;
-			tblk_description.Foreground = Brushes.Black;
+			ResetDescriptionStyles();
 			if (searchbar.Text != null)
 			{
 				string query = searchbar.Text;
@@ -177,6 +178,7 @@ namespace S00199895_Mark_Curran_Book_App
 
 		private void dataGrid_read_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
+			ResetDescriptionStyles();
 			BookRead bR = dataGrid_read.SelectedItem as BookRead;
 
 			GetBookInfo(bR.Title + " " + bR.Author);
@@ -184,6 +186,7 @@ namespace S00199895_Mark_Curran_Book_App
 
 		private void dataGrid_tbr_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
+			ResetDescriptionStyles();
 			Book book = dataGrid_tbr.SelectedItem as Book;
 
 			if (book != null)
@@ -199,22 +202,41 @@ namespace S00199895_Mark_Curran_Book_App
 			tbx_author.Clear();
 		}
 
-		private void InsertData()
+		private void ResetDescriptionStyles()
 		{
-			string connetionString = "Data Source=BookAppDB.mdf;Initial Catalog=Air; Trusted_Connection=True;";
-			// [ ] required as your fields contain spaces!!
-			string insStmt = "insert into dbo.Books ([Title], [Author]) values (@title,@author)";
-
-			using (SqlConnection cnn = new SqlConnection(connetionString))
-			{
-				cnn.Open();
-				SqlCommand insCmd = new SqlCommand(insStmt, cnn);
-				// use sqlParameters to prevent sql injection!
-				insCmd.Parameters.AddWithValue("@title", "Jade War");
-				insCmd.Parameters.AddWithValue("@author", "Fonda Lee");
-				int affectedRows = insCmd.ExecuteNonQuery();
-				MessageBox.Show(affectedRows + " rows inserted!");
-			}
+			tblk_description.FontStyle = FontStyles.Normal;
+			tblk_description.Foreground = Brushes.Black;
 		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			Model1Container2 db = new Model1Container2();
+
+			var query = from b in db.BookTBLs
+						select new
+						{
+							b.Title,
+							b.Author
+						};
+			dataGrid_read.ItemsSource = query.ToList();
+		}
+		/*
+public void Insert()
+{
+	string conn = "data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=C:\\code\\data\\BookAppDB.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework";
+
+	string insStmt = "insert into [dbo.BookTBL] ([Title], [Author]) values (@title,@author)";
+
+	using (SqlConnection cnn = new SqlConnection(conn))
+	{
+		cnn.Open();
+		SqlCommand insCmd = new SqlCommand(insStmt, cnn);
+		// use sqlParameters to prevent sql injection!
+		insCmd.Parameters.AddWithValue("@title", "Jade war");
+		insCmd.Parameters.AddWithValue("@author", "Fonda Lee");
+		int affectedRows = insCmd.ExecuteNonQuery();
+		MessageBox.Show(affectedRows + " rows inserted!");
+	}
+}*/
 	}
 }

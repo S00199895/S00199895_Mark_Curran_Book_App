@@ -3,13 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:S00199895_Mark_Curran_Book_App"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
-    <Grid>
-        <TabControl HorizontalAlignment="Left" Height="231" Margin="10,40,0,0" VerticalAlignment="Top" Width="365">
-            <TabItem Header="Read">
-                <Grid Background="#FFE5E5E5" Margin="0,4,-8,0">
+        
+        Background="{DynamicResource MaterialDesignLightBackground}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        
+        Title="MainWindow" Height="729.5" Width="1195.5" Loaded="Window_Loaded">
+    <Grid TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular">
+
+        <TabControl HorizontalAlignment="Left" Height="284" Margin="10,40,0,0" VerticalAlignment="Top" Width="508">
+            <TabItem Header="Read" FontSize="16">
+                <Grid Background="#FFE5E5E5" Margin="0,4,-83,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="19*"/>
                         <ColumnDefinition Width="69*"/>
@@ -17,9 +27,9 @@
                     <DataGrid x:Name="dataGrid_read" ItemsSource="{Binding Book}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column"
-                              Grid.ColumnSpan="2" Margin="0,0,-25,0"
+                              Grid.ColumnSpan="2" Margin="0,0,-20,-113"
                               GridLinesVisibility="None"
-                              AlternatingRowBackground="LightGray" SelectionChanged="dataGrid_read_SelectionChanged">
+                              AlternatingRowBackground="LightGray" SelectionChanged="dataGrid_read_SelectionChanged" FontSize="12">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Title"
                                                 Binding="{Binding Title}"
@@ -37,7 +47,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem Header="TBR">
+            <TabItem Header="TBR" FontSize="16">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -45,42 +55,43 @@
                     </Grid.ColumnDefinitions>
                     <DataGrid x:Name="dataGrid_tbr" ItemsSource="{Binding Book}"
                               AutoGenerateColumns="False"
-                              HeadersVisibility="Column" Grid.ColumnSpan="2" SelectionChanged="dataGrid_tbr_SelectionChanged">
+                              HeadersVisibility="Column" Grid.ColumnSpan="2" SelectionChanged="dataGrid_tbr_SelectionChanged" FontSize="12">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Title"
                                                 Binding="{Binding Title}"
                                                 Width="*"/>
                             <DataGridTextColumn Header="Author"
                                                 Binding="{Binding Author}"
-                                                Width="Auto"/>
+                                                Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
-        <TextBlock HorizontalAlignment="Left" Margin="10,276,0,0" TextWrapping="Wrap" Text="Add a book" VerticalAlignment="Top" FontSize="16"/>
-        <RadioButton x:Name="radio_read" Content="Read" HorizontalAlignment="Left" Margin="10,302,0,0" VerticalAlignment="Top"/>
-        <RadioButton x:Name="radio_tbr" Content="TBR" HorizontalAlignment="Left" Margin="98,302,0,0" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="12,364,0,0" TextWrapping="Wrap" Text="Rating" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,338,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,322,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top"/>
-        <TextBox x:Name="tbx_title" HorizontalAlignment="Left" Height="17" Margin="83,321,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" GotFocus="tbx_title_GotFocus"/>
-        <TextBox x:Name="tbx_author" HorizontalAlignment="Left" Height="17" Margin="83,342,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
-        <ComboBox x:Name="combo_rating" HorizontalAlignment="Left" Margin="83,364,0,0" VerticalAlignment="Top" Width="42"/>
-        <Button x:Name="btn_addBook" Content="Add Book" HorizontalAlignment="Left" Margin="50,389,0,0" VerticalAlignment="Top" Width="75" Click="btn_addBook_Click"/>
-        <Image x:Name="img_book" HorizontalAlignment="Left" Height="190" Margin="424,61,0,0" VerticalAlignment="Top" Width="148" Source="1200px-Grey_background.jpg"/>
-        <TextBlock x:Name="tblk_description" HorizontalAlignment="Left" Margin="572,61,0,0" TextWrapping="Wrap" Text="Book selected description" FontStyle="Italic" Foreground="Gray" VerticalAlignment="Top" Height="190" Width="210"/>
-        <Button x:Name="btn_save_bookInfo" Content="Save book info" HorizontalAlignment="Left" Margin="543,278,0,0" VerticalAlignment="Top" Width="105" Click="btn_save_bookInfo_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="27,365,0,0" TextWrapping="Wrap" Text="Add a book" VerticalAlignment="Top" FontSize="20"/>
+        <RadioButton x:Name="radio_read" Content="Read" HorizontalAlignment="Left" Margin="32,413,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <RadioButton x:Name="radio_tbr" Content="TBR" HorizontalAlignment="Left" Margin="129,413,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="27,510,0,0" TextWrapping="Wrap" Text="Rating" VerticalAlignment="Top" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="38,473,0,0" TextWrapping="Wrap" Text="Author" VerticalAlignment="Top" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="56,442,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" FontSize="18"/>
+        <TextBox x:Name="tbx_title" HorizontalAlignment="Left" Height="28" Margin="129,441,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" GotFocus="tbx_title_GotFocus" FontSize="18"/>
+        <TextBox x:Name="tbx_author" HorizontalAlignment="Left" Height="26" Margin="129,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" FontSize="18"/>
+        <ComboBox x:Name="combo_rating" HorizontalAlignment="Left" Margin="144,501,0,0" VerticalAlignment="Top" Width="42" FontSize="18"/>
+        <Button x:Name="btn_addBook" Content="Add Book" HorizontalAlignment="Left" Margin="66,554,0,0" VerticalAlignment="Top" Width="147" Click="btn_addBook_Click" Height="54" FontSize="18"/>
+        <Image x:Name="img_book" HorizontalAlignment="Left" Height="240" Margin="536,149,0,0" VerticalAlignment="Top" Width="198" Source="1200px-Grey_background.jpg"/>
+        <TextBlock x:Name="tblk_description" HorizontalAlignment="Left" Margin="747,94,0,0" TextWrapping="Wrap" Text="Book selected description" FontStyle="Italic" Foreground="Gray" VerticalAlignment="Top" Height="343" Width="431" FontSize="18"/>
+        <Button x:Name="btn_save_bookInfo" Content="Save book info" HorizontalAlignment="Left" Margin="747,453,0,0" VerticalAlignment="Top" Width="162" Click="btn_save_bookInfo_Click" Height="54" FontSize="18"/>
 
         <TextBox x:Name="searchbar" HorizontalAlignment="Left"
-                 Height="23" Margin="468,26,0,0"
+                 Height="32" Margin="536,40,0,0"
                  TextWrapping="Wrap" VerticalAlignment="Top"
-                 Width="160"
+                 Width="271"
                  Text="Search the web for books"
                  Foreground="Gray"
-                 FontStyle="Italic" GotFocus="searchbar_GotFocus"/>
-        <Button Content="Search&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="46" Margin="653,25,0,0" Height="22" Click="searchbar_click"/>
-        <Button x:Name="btn_save_books" Content="Save" HorizontalAlignment="Left" Margin="283,242,0,0" VerticalAlignment="Top" Width="75" Click="btn_save_books_Click"/>
+                 FontStyle="Italic" GotFocus="searchbar_GotFocus" FontSize="16"/>
+        <Button Content="Search&#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="126" Margin="874,40,0,0" Height="32" Click="searchbar_click" FontSize="18"/>
+        <Button x:Name="btn_save_books" Content="Save" HorizontalAlignment="Left" Margin="326,272,0,0" VerticalAlignment="Top" Width="74" Click="btn_save_books_Click" FontSize="16"/>
+        <Button x:Name="btn_load" Content="Load" HorizontalAlignment="Left" Margin="420,272,0,0" VerticalAlignment="Top" Width="76" FontSize="16" Click="Button_Click"/>
 
     </Grid>
 </Window>

@@ -13,10 +13,10 @@ namespace S00199895_Mark_Curran_Book_App
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Model1Container : DbContext
+    public partial class Model1Container2 : DbContext
     {
-        public Model1Container()
-            : base("name=Model1Container")
+        public Model1Container2()
+            : base("name=Model1Container2")
         {
         }
     
@@ -25,7 +25,7 @@ namespace S00199895_Mark_Curran_Book_App
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Book> Books { get; set; }
-        public virtual DbSet<Author> Authors { get; set; }
+        public virtual DbSet<AuthorTBL> AuthorTBLs { get; set; }
+        public virtual DbSet<BookTBL> BookTBLs { get; set; }
     }
 }
