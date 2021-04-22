@@ -78,7 +78,7 @@ namespace S00199895_Mark_Curran_Book_App
 			return ratings;
 		}
 
-		private void GetBookInfo(string query)
+		public void GetBookInfo(string query)
 		{
 			var apiURL = "https://www.googleapis.com/books/v1/volumes?q=" + query;
 
@@ -92,18 +92,28 @@ namespace S00199895_Mark_Curran_Book_App
 				var results = obj.items;
 
 
-
+				
 				DisplayBookInfo(results);
 			}
 		}
 
 		private void DisplayBookInfo(List<Item> info)
 		{
-			var item = info[0];
-			img_book.Source = new BitmapImage(new Uri(item.volumeInfo.imageLinks.smallThumbnail));
-			tblk_description.Text = item.volumeInfo.description;
-			tbx_title.Text = item.volumeInfo.title;
-			tbx_author.Text = item.volumeInfo.authors[0];
+			try
+			{
+				var item = info[0];
+				img_book.Source = new BitmapImage(new Uri(item.volumeInfo.imageLinks.smallThumbnail));
+				tblk_description.Text = item.volumeInfo.description;
+				tbx_title.Text = item.volumeInfo.title;
+				tbx_author.Text = item.volumeInfo.authors[0];
+			}
+			catch (Exception e)
+			{
+				MessageBox.Show("An error occurred displaying the book's info:\n", e.Message);
+				throw;
+
+			}
+
 
 		}
 
@@ -159,12 +169,16 @@ namespace S00199895_Mark_Curran_Book_App
 		}
 		private void btn_save_books_Click(object sender, RoutedEventArgs e)
 		{
+			StreamWriter sW = new StreamWriter("booksList.txt");
+
 			foreach (Book b in booksRead)
 			{
-				StreamWriter sW = new StreamWriter("booksList.txt");
 
 				sW.WriteLine($"{b.Title}, by {b.Author}");
 			}
+			sW.Flush();
+			sW.Close();
+			Insert();
 		}
 
 		//Change the placeholder text set in the xaml back
@@ -178,10 +192,25 @@ namespace S00199895_Mark_Curran_Book_App
 
 		private void dataGrid_read_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
+			var bookSelected = dataGrid_read.SelectedItem;
 			ResetDescriptionStyles();
-			BookRead bR = dataGrid_read.SelectedItem as BookRead;
+			Type tp = bookSelected.GetType();
 
-			GetBookInfo(bR.Title + " " + bR.Author);
+			if (bookSelected is BookRead)
+			{
+				Book bR = dataGrid_read.SelectedItem as Book;
+
+				GetBookInfo(bR.Title + " " + bR.Author);
+			}
+			else if (bookSelected is BookTBL)
+			{
+				BookTBL b = dataGrid_read.SelectedItem as BookTBL;
+				GetBookInfo(b.Title + " " + b.Author);
+			}
+			else
+			{
+				MessageBox.Show("");
+			}
 		}
 
 		private void dataGrid_tbr_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -193,7 +222,7 @@ namespace S00199895_Mark_Curran_Book_App
 			{
 				GetBookInfo(book.Title + " " + book.Author);
 			}
-			
+
 		}
 
 		private void tbx_title_GotFocus(object sender, RoutedEventArgs e)
@@ -210,33 +239,51 @@ namespace S00199895_Mark_Curran_Book_App
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
+			//Load books
 			Model1Container2 db = new Model1Container2();
 
 			var query = from b in db.BookTBLs
-						select new
-						{
-							b.Title,
-							b.Author
-						};
+						select b;
+
+			//Is not making them into type bR, instead type BookTBL
+			//Nullreference then when selectionchanged
+			/*foreach (var item in query.ToList())
+			{
+				GetBookInfo(item.Title + " " + item.Author);
+			}*/
+
 			dataGrid_read.ItemsSource = query.ToList();
 		}
-		/*
-public void Insert()
-{
-	string conn = "data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=C:\\code\\data\\BookAppDB.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework";
 
-	string insStmt = "insert into [dbo.BookTBL] ([Title], [Author]) values (@title,@author)";
+		public void Insert()
+		{
+			Model1Container2 db = new Model1Container2();
 
-	using (SqlConnection cnn = new SqlConnection(conn))
-	{
-		cnn.Open();
-		SqlCommand insCmd = new SqlCommand(insStmt, cnn);
-		// use sqlParameters to prevent sql injection!
-		insCmd.Parameters.AddWithValue("@title", "Jade war");
-		insCmd.Parameters.AddWithValue("@author", "Fonda Lee");
-		int affectedRows = insCmd.ExecuteNonQuery();
-		MessageBox.Show(affectedRows + " rows inserted!");
-	}
-}*/
+
+			foreach (var book in booksRead)
+			{
+				BookTBL newBook = new BookTBL() { Author = $"{book.Author}", Title = $"{book.Title}", AuthorTBLId = 1 };
+
+				db.BookTBLs.Add(newBook);
+				db.SaveChanges();
+			}
+		}
+
+
+		//string conn = "data source=(LocalDB)\\MSSQLLocalDB;attachdbfilename=C:\\code\\data\\BookAppDB.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework";
+
+		//string insStmt = "insert into [dbo.BookTBL] ([Title], [Author]) values (@title,@author)";
+
+		//using (SqlConnection cnn = new SqlConnection(conn))
+		//{
+		//	cnn.Open();
+		//	SqlCommand insCmd = new SqlCommand(insStmt, cnn);
+		//	// use sqlParameters to prevent sql injection!
+		//	insCmd.Parameters.AddWithValue("@title", "Jade war");
+		//	insCmd.Parameters.AddWithValue("@author", "Fonda Lee");
+		//	int affectedRows = insCmd.ExecuteNonQuery();
+		//	MessageBox.Show(affectedRows + " rows inserted!");
+		//}
+		//}
 	}
 }
