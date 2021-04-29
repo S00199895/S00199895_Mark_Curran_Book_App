@@ -14,7 +14,7 @@
         Title="MainWindow" Height="729.5" Width="1195.5" Loaded="Window_Loaded">
     <Grid TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
-          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+          TextElement.Foreground="{DynamicResource MaterialDesignDarkBackground}"
      TextElement.FontWeight="Regular">
 
         <TabControl HorizontalAlignment="Left" Height="284" Margin="10,40,0,0" VerticalAlignment="Top" Width="508">
@@ -54,8 +54,11 @@
                         <ColumnDefinition Width="21*"/>
                     </Grid.ColumnDefinitions>
                     <DataGrid x:Name="dataGrid_tbr" ItemsSource="{Binding Book}"
-                              AutoGenerateColumns="False"
-                              HeadersVisibility="Column" Grid.ColumnSpan="2" SelectionChanged="dataGrid_tbr_SelectionChanged" FontSize="12">
+                             AutoGenerateColumns="False"
+                              HeadersVisibility="Column"
+                              Grid.ColumnSpan="2" Margin="0,0,-20,-113"
+                              GridLinesVisibility="None"
+                              AlternatingRowBackground="LightGray" SelectionChanged="dataGrid_tbr_SelectionChanged" FontSize="12">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Title"
                                                 Binding="{Binding Title}"
