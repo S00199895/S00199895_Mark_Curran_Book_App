@@ -17,6 +17,20 @@
           TextElement.Foreground="{DynamicResource MaterialDesignDarkBackground}"
      TextElement.FontWeight="Regular">
 
+        <Grid.Resources>
+            <DataTemplate x:Key="Dg_Template">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Title}" Margin="5" FontSize="14"/>
+                        <TextBlock Text="{Binding Author}" Margin="5" FontSize="12" FontWeight="Light"/>
+                    </StackPanel>
+                    <StackPanel Margin="5" Orientation="Vertical">
+                        <TextBlock Text="{Binding Rating}" Margin="5" FontSize="18" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+
         <TabControl HorizontalAlignment="Left" Height="284" Margin="10,40,0,0" VerticalAlignment="Top" Width="508">
             <TabItem Header="Read" FontSize="16">
                 <Grid Background="#FFE5E5E5" Margin="0,4,-83,0">
@@ -27,11 +41,12 @@
                     <DataGrid x:Name="dataGrid_read" ItemsSource="{Binding Book}"
                               AutoGenerateColumns="False"
                               HeadersVisibility="Column"
-                              Grid.ColumnSpan="2" Margin="0,0,-20,-113"
+                              Grid.ColumnSpan="2" Margin="0,0,73,-19"
                               GridLinesVisibility="None"
                               AlternatingRowBackground="LightGray" SelectionChanged="dataGrid_read_SelectionChanged" FontSize="12">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Title"
+                            <DataGridTemplateColumn CellTemplate="{StaticResource Dg_Template}"/>
+                            <!--<DataGridTextColumn Header="Title"
                                                 Binding="{Binding Title}"
                                                 Width="Auto"/>
                             <DataGridTextColumn Header="Author"
@@ -42,7 +57,7 @@
                                                 Width="Auto"/>
                             <DataGridTextColumn Header="Date Read"
                                                 Binding="{Binding DateRead.Date}"
-                                                Width="Auto"/>
+                                                Width="Auto"/> -->
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
@@ -79,10 +94,10 @@
         <TextBlock HorizontalAlignment="Left" Margin="56,442,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" FontSize="18"/>
         <TextBox x:Name="tbx_title" HorizontalAlignment="Left" Height="28" Margin="129,441,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" GotFocus="tbx_title_GotFocus" FontSize="18"/>
         <TextBox x:Name="tbx_author" HorizontalAlignment="Left" Height="26" Margin="129,469,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" FontSize="18"/>
-        <ComboBox x:Name="combo_rating" HorizontalAlignment="Left" Margin="144,501,0,0" VerticalAlignment="Top" Width="42" FontSize="18"/>
+        <ComboBox Background="AliceBlue" x:Name="combo_rating" HorizontalAlignment="Left" Margin="129,510,0,0" VerticalAlignment="Top" Width="42" FontSize="18"/>
         <Button x:Name="btn_addBook" Content="Add Book" HorizontalAlignment="Left" Margin="66,554,0,0" VerticalAlignment="Top" Width="147" Click="btn_addBook_Click" Height="54" FontSize="18"/>
         <Image x:Name="img_book" HorizontalAlignment="Left" Height="240" Margin="536,149,0,0" VerticalAlignment="Top" Width="198" Source="1200px-Grey_background.jpg"/>
-        <TextBlock x:Name="tblk_description" HorizontalAlignment="Left" Margin="747,94,0,0" TextWrapping="Wrap" Text="Book selected description" FontStyle="Italic" Foreground="Gray" VerticalAlignment="Top" Height="343" Width="431" FontSize="18"/>
+        <TextBlock x:Name="tblk_description" HorizontalAlignment="Left" Margin="739,94,0,0" TextWrapping="Wrap" Text="Book selected description" FontStyle="Italic" Foreground="Gray" VerticalAlignment="Top" Height="343" Width="430" FontSize="18"/>
         <Button x:Name="btn_save_bookInfo" Content="Save book info" HorizontalAlignment="Left" Margin="747,453,0,0" VerticalAlignment="Top" Width="162" Click="btn_save_bookInfo_Click" Height="54" FontSize="18"/>
 
         <TextBox x:Name="searchbar" HorizontalAlignment="Left"
